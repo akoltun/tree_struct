@@ -1,3 +1,3 @@
-module TreeStruct
-  VERSION = "0.1.0"
+class TreeStruct
+  VERSION = "1.0.0"
 end
