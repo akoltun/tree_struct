@@ -22,6 +22,8 @@ Or install it yourself as:
 
 ## Usage
 
+It is used as the parent class for [FormObj::Form](https://github.com/akoltun/form_obj)
+
 ### Table of Contents
 
 1. [Definition](#1-definition)
