@@ -44,7 +44,7 @@ class TreeStruct
           if @array
             @parent.array_class.new(@nested_class)
           else
-            @nested_class.new
+            create_nested
           end
         end
 
@@ -54,6 +54,12 @@ class TreeStruct
       else
         @default_value
       end
+    end
+
+    private
+
+    def create_nested
+      @nested_class.new
     end
   end
 end
