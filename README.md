@@ -141,7 +141,7 @@ class ArrayTreeStruct < TreeStruct
 end
 ```
 
-Add new elements in the array by using method :create which adds a new it.
+Add new elements in the array by using method :create.
 
 ```ruby
 array_tree_struct = ArrayTreeStruct.new
