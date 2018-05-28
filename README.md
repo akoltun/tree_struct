@@ -1,9 +1,5 @@
 # TreeStruct
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/tree_struct`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
-
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -48,7 +44,7 @@ end
 Access attributes via dot notation.
 
 ```ruby
-simple_tree_struct = SimpleTreeStruct.new
+simple_tree_struct = SimpleTreeStruct.new   # => #<SimpleTreeStruct name: nil, year: nil>
 simple_tree_struct.name = 'Ferrari'         # => "Ferrari"
 simple_tree_struct.year = 1950              # => 1950
 ```
@@ -62,7 +58,7 @@ class NestedTreeStruct < TreeStruct
   attribute :name
   attribute :year
   attribute :car do
-    attribute :model
+    attribute :body
     attribute :driver
     attribute :engine do
       attribute :power
@@ -80,7 +76,7 @@ class EngineTreeStruct < TreeStruct
   attribute :volume
 end
 class CarTreeStruct < TreeStruct
-  attribute :model
+  attribute :body
   attribute :driver
   attribute :engine, class: EngineTreeStruct
 end
@@ -94,10 +90,10 @@ end
 Access attributes via dot notation.
 
 ```ruby
-nested_tree_struct = NestedTreeStruct.new
+nested_tree_struct = NestedTreeStruct.new   # => #<NestedTreeStruct name: nil, year: nil, car: #<CarTreeStruct body: nil, driver: nil, engine: #<EngineTreeStruct power: nil, volume: nil, power: nil, volume: nil>, body: nil, driver: nil, engine: #<EngineTreeStruct power: nil, volume: nil, power: nil, volume: nil>>>
 nested_tree_struct.name = 'Ferrari'         # => "Ferrari"
 nested_tree_struct.year = 1950              # => 1950
-nested_tree_struct.car.model = '340 F1'     # => "340 F1"
+nested_tree_struct.car.body = '340 F1'      # => "340 F1"
 nested_tree_struct.car.driver = 'Ascari'    # => "Ascari"
 nested_tree_struct.car.engine.power = 335   # => 335
 nested_tree_struct.car.engine.volume = 4.1  # => 4.1
@@ -112,7 +108,7 @@ class ArrayTreeStruct < TreeStruct
   attribute :name
   attribute :year
   attribute :cars, array: true do
-    attribute :model
+    attribute :body
     attribute :driver
     attribute :engine do
       attribute :power
@@ -130,7 +126,7 @@ class EngineTreeStruct < TreeStruct
   attribute :volume
 end
 class CarTreeStruct < TreeStruct
-  attribute :model
+  attribute :body
   attribute :driver
   attribute :engine, class: EngineTreeStruct
 end
@@ -144,13 +140,13 @@ end
 Add new elements in the array by using method :create.
 
 ```ruby
-array_tree_struct = ArrayTreeStruct.new
+array_tree_struct = ArrayTreeStruct.new         # => #<ArrayTreeStruct name: nil, year: nil, cars: []>
 array_tree_struct.name = 'Ferrari'              # => "Ferrari"
 array_tree_struct.year = 1950                   # => 1950
-array_tree_struct.size 				            # => 0
-array_tree_struct.cars.create
-array_tree_struct.size 				            # => 1
-array_tree_struct.cars[0].model = '340 F1'      # => "340 F1"
+array_tree_struct.cars.size 	                # => 0
+array_tree_struct.cars.create                   # => #<CarTreeStruct body: nil, driver: nil, engine: #<EngineTreeStruct power: nil, volume: nil>>
+array_tree_struct.cars.size 	                # => 1
+array_tree_struct.cars[0].body = '340 F1'       # => "340 F1"
 array_tree_struct.cars[0].driver = 'Ascari'     # => "Ascari"
 array_tree_struct.cars[0].engine.power = 335    # => 335
 array_tree_struct.cars[0].engine.volume = 4.1   # => 4.1
@@ -174,7 +170,7 @@ nested_tree_struct.to_hash      # => {
                                 # =>    :name => "Ferrari",
                                 # =>    :year => 1950,
                                 # =>    :car  => {
-                                # =>      :model => "340 F1",
+                                # =>      :body => "340 F1",
                                 # =>      :driver => "Ascari",
                                 # =>      :engine => {
                                 # =>        :power => 335,
@@ -191,7 +187,7 @@ array_tree_struct.to_hash       # => {
                                 # =>    :name => "Ferrari",
                                 # =>    :year => 1950,
                                 # =>    :cars => [{
-                                # =>      :model => "340 F1",
+                                # =>      :body => "340 F1",
                                 # =>      :driver => "Ascari",
                                 # =>      :engine => {
                                 # =>        :power => 335,

@@ -5,51 +5,59 @@ require "tree_struct/attributes"
 require 'active_support/core_ext/class/attribute'
 
 class TreeStruct
-  private
-
   class_attribute :_attributes, instance_predicate: false, instance_reader: false, instance_writer: false
   self._attributes = Attributes.new
 
-  def self._define_attribute_getter(attribute)
-    define_method attribute.name do
-      _get_attribute_value(attribute)
+  class << self
+    def array_class
+      Array
     end
-  end
 
-  def self._define_attribute_setter(attribute)
-    define_method "#{attribute.name}=" do |value|
-      _set_attribute_value(attribute, value)
+    def nested_class
+      ::TreeStruct
     end
-  end
 
-  public
+    def attribute_class
+      Attribute
+    end
 
-  def self.array_class
-    Array
-  end
+    def attribute(name, opts = {}, &block)
+      attr = attribute_class.new(name, opts.merge(parent: self), &block)
+      self._attributes = _attributes.add(attr)
+      _define_attribute_getter(attr)
+      _define_attribute_setter(attr)
+      self
+    end
 
-  def self.nested_class
-    ::TreeStruct
-  end
+    def attributes
+      self._attributes.map(&:name)
+    end
 
-  def self.attribute_class
-    Attribute
-  end
+    def inspect
+      "#{name}(#{attributes.join(', ')})"
+    end
 
-  def self.attribute(name, opts = {}, &block)
-    attr = self.attribute_class.new(name, opts.merge(parent: self), &block)
-    self._attributes = self._attributes.add(attr)
-    self._define_attribute_getter(attr)
-    self._define_attribute_setter(attr)
-    self
-  end
+    private
 
-  def self.attributes
-    self._attributes.map(&:name)
+    def _define_attribute_getter(attribute)
+      define_method attribute.name do
+        _get_attribute_value(attribute)
+      end
+    end
+
+    def _define_attribute_setter(attribute)
+      define_method "#{attribute.name}=" do |value|
+        _set_attribute_value(attribute, value)
+      end
+    end
   end
 
   def to_hash
     Hash[self.class._attributes.map { |attribute| [attribute.name, attribute.subform? ? send(attribute.name).to_hash : send(attribute.name)] }]
+  end
+
+  def inspect
+    "#<#{self.class.name} #{self.class._attributes.map { |attribute| "#{attribute.name}: #{send(attribute.name).inspect}"}.join(', ')}>"
   end
 
   private
