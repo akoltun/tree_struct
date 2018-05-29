@@ -1,5 +1,8 @@
 # TreeStruct
 
+[![Gem Version](https://badge.fury.io/rb/tree_struct.svg)](https://badge.fury.io/rb/tree_struct)
+[![Build Status](https://travis-ci.com/akoltun/tree_struct.svg?branch=master)](https://travis-ci.com/akoltun/tree_struct)
+
 ## Installation
 
 Add this line to your application's Gemfile:
