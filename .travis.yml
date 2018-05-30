@@ -27,4 +27,4 @@ gemfile:
   - gemfiles/5.0.gemfile
   - gemfiles/5.1.gemfile
   - gemfiles/5.2.gemfile
-before_install: gem install bundler -v 1.16.1
+before_install: gem install bundler -v 1.16.2
