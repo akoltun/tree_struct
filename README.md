@@ -1,7 +1,6 @@
-# TreeStruct
+# !!!`tree_struct` gem is merged to `form_obj` gem and is not maintained separately anymore
 
-[![Gem Version](https://badge.fury.io/rb/tree_struct.svg)](https://badge.fury.io/rb/tree_struct)
-[![Build Status](https://travis-ci.com/akoltun/tree_struct.svg?branch=master)](https://travis-ci.com/akoltun/tree_struct)
+`TreeStruct` class is available now as `FormObj::Struct` class - part of `form_obj` gem. 
 
 ## Installation
 

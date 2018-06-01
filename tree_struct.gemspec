@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Alexander Koltun"]
   spec.email         = ["alexander.koltun@gmail.com"]
 
-  spec.summary       = %q{Similar to Ruby Struct class but allows to describe nested and arrayed structures}
+  spec.summary       = %q{!!!merged to `form_obj` gem!!! Similar to Ruby Struct class but allows to describe nested and arrayed structures}
   spec.description   = %q{TreeStruct allows to describe a structure with nested TreeStruct and with arrays of TreeStruct.
 The level of nesting is not limited.}
   spec.homepage      = "https://github.com/akoltun/tree_struct"
